@@ -12,9 +12,40 @@
   <name>Arquillian Container Tomcat Managed 10.x</name>
 
   <properties>
-    <test.catalina.home>${project.build.directory}/cargo/installs/apache-tomcat-${tomcat10.version}/apache-tomcat-${tomcat10.version}</test.catalina.home>
+    <test.catalina.home>${project.build.directory}/cargo/installs/camunda-tomcat-assembly-jakarta-${project.version}/server/apache-tomcat-${tomcat10.version}</test.catalina.home>
     <test.catalina.base>${project.build.directory}/cargo/configurations/tomcat10x</test.catalina.base>
   </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.jboss.weld.servlet</groupId>
+      <artifactId>weld-servlet-shaded</artifactId>
+      <version>5.1.2.Final</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.camunda.bpm</groupId>
+      <artifactId>camunda-engine</artifactId>
+      <version>7.22.0-alpha1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.camunda.bpm</groupId>
+      <artifactId>camunda-engine-cdi-jakarta</artifactId>
+      <version>7.22.0-alpha1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.arquillian.container</groupId>
+      <artifactId>camunda-tomcat-assembly-jakarta</artifactId>
+      <version>1.2.2.Final-SNAPSHOT</version>
+      <type>tar.gz</type>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
 
   <build>
     <plugins>
@@ -27,10 +58,19 @@
             <configuration>
               <container>
                 <containerId>tomcat10x</containerId>
-                <zipUrlInstaller>
-                  <url>https://archive.apache.org/dist/tomcat/tomcat-10/v${tomcat10.version}/bin/apache-tomcat-${tomcat10.version}.zip</url>
-                </zipUrlInstaller>
+                <type>installed</type>
+                <home>${test.catalina.home}</home>
+                ´<artifactInstaller>
+                  <groupId>org.jboss.arquillian.container</groupId>
+                  <artifactId>camunda-tomcat-assembly-jakarta</artifactId>
+                  <version>1.2.2.Final-SNAPSHOT</version>
+                  <type>tar.gz</type>
+                </artifactInstaller>
               </container>
+              <configuration>
+                <type>standalone</type>
+                <home>${project.build.directory}/cargo/configurations/tomcat10x</home>
+              </configuration>
             </configuration>
           </execution>
         </executions>

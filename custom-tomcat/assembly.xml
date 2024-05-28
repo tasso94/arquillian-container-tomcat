@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="urn:maven:assembly:1.1.0-SNAPSHOT">
+    
+  <id>assemble</id>
+    
+  <formats>
+    <format>tar.gz</format>
+  </formats>
+
+  <includeBaseDirectory>false</includeBaseDirectory>
+
+  <dependencySets>
+   <dependencySet>
+      <outputDirectory>server/</outputDirectory>
+      <includes>
+        <include>org.apache.tomcat:tomcat:tar.gz</include>
+      </includes>
+      <unpackOptions>
+        <excludes>
+          <exclude>**/conf/server.xml</exclude>
+        </excludes>
+      </unpackOptions>
+      <unpack>true</unpack>
+    </dependencySet>
+    <dependencySet>
+      <outputDirectory>server/apache-tomcat-${tomcat10.version}/lib</outputDirectory>
+      <includes>
+        <include>com.h2database:h2:jar</include>
+        <include>org.camunda.bpm:camunda-engine:jar</include>
+        <include>org.mybatis:mybatis:jar:*</include>
+        <include>com.fasterxml.uuid:java-uuid-generator:jar:*</include>
+        <include>org.camunda.bpm.model:*:jar</include>
+        <include>org.camunda.bpm.dmn:*:jar</include>
+        <include>org.camunda.bpm.juel:*:jar</include>
+        <include>org.camunda.feel:*:jar</include>
+        <include>joda-time:joda-time:jar:*</include>
+        <include>org.slf4j:slf4j-api:jar:*</include>
+        <include>org.camunda.bpm:camunda-engine-plugin-*:jar</include>
+        <include>org.camunda.spin:camunda-spin-core*:jar</include>
+        <include>org.camunda.spin:camunda-spin-dataformat-all*:jar</include>
+        <include>org.camunda.connect:*:jar</include>
+        <include>org.camunda.commons:*:jar</include>
+      </includes>
+    </dependencySet>
+  </dependencySets>
+
+  <files>
+    <file>
+      <source>src/conf/server.xml</source>
+      <outputDirectory>server/apache-tomcat-${tomcat10.version}/conf/</outputDirectory>
+    </file>
+    
+    <file>
+      <source>src/conf/bpm-platform.xml</source>
+      <outputDirectory>server/apache-tomcat-${tomcat10.version}/conf/</outputDirectory>
+    </file>
+      
+    <file>
+      <source>src/tomcat/setenv.bat</source>
+      <outputDirectory>server/apache-tomcat-${tomcat10.version}/bin/</outputDirectory>
+    </file>
+    <file>
+      <source>src/tomcat/setenv.sh</source>
+      <outputDirectory>server/apache-tomcat-${tomcat10.version}/bin/</outputDirectory>
+    </file>
+  </files>
+</assembly>

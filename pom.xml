@@ -265,5 +265,6 @@
     <module>tomcat-remote-parent</module>
     <module>tomcat-remote-common</module>
     <module>tomcat-remote-10</module>
+    <module>custom-tomcat</module>
   </modules>
 </project>
