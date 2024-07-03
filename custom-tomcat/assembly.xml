@@ -41,6 +41,7 @@
         <include>org.camunda.spin:camunda-spin-dataformat-all*:jar</include>
         <include>org.camunda.connect:*:jar</include>
         <include>org.camunda.commons:*:jar</include>
+        <include>org.jboss.weld.servlet:weld-servlet-shaded*:jar</include>
       </includes>
     </dependencySet>
   </dependencySets>

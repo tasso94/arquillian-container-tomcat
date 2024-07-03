@@ -63,7 +63,7 @@ public class AccessBeanIT {
             .addAsLibraries(Maven.configureResolver()
                 .workOffline()
                 .loadPomFromFile("pom.xml")
-                .resolve("org.camunda.bpm:camunda-engine-cdi-jakarta", "org.jboss.weld.servlet:weld-servlet-shaded")
+                .resolve("org.camunda.bpm:camunda-engine-cdi-jakarta"/*, "org.jboss.weld.servlet:weld-servlet-shaded"*/)
                 .withoutTransitivity()
                 .as(JavaArchive.class))
             .addClass(TestProcessApplication.class)
